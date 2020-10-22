@@ -83,8 +83,20 @@ app.get("/attendance_transaction",function(req,res){
 });
 
 app.post("/attendance_transaction",function(req,res){
-    console.log(req.body);
-})
+    con.query("insert into attendance values(?,?,?,?)",
+    [student['MIS'],req.body['semester'],req.body['days_present'],105],function(err,result){
+        if(err) throw err;
+    });
+    con.query("insert into payment_details values(?,?,?,?)",
+    [req.body['transcation_id'],req.body['year'],req.body['amount'],req.body['days_present']],function(err,result){
+        if(err) throw err;
+    });
+    con.query("insert into fees(?,?)",
+    [student['MIS'],req.body['transaction_id']],function(err,result){
+        if(err) throw err;
+    });
+    console.log("Transaction and Attendance details entered successfully");
+});
 
 app.listen(3000,function(){
     console.log("Server started at 3000");
