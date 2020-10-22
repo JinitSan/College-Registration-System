@@ -11,7 +11,7 @@ app.use(express.static("public"));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "password",
+    password: "Jin@mysql201",
     database:"student_reg"
 });
 
@@ -34,9 +34,25 @@ app.get("/register",function(req,res){
 })
 
 app.post("/register",function(req,res){
-    console.log(req.body);
+    con.query("SELECT * FROM student_loc2 WHERE city = ?",[req.body['city']],function (err, result){
+        if (err) throw err;
+        if(result.length==0){
+            con.query("insert into student_loc2 values(?,?)",[req.body['city'],req.body['state']],function(err,result){
+                if (err) throw err;
+            });
+            con.query("insert into student_loc1 values(?,?)",[req.body['zipcode'],req.body['city']],function(err,result){
+                if (err) throw err;
+            }); 
+        }
+        con.query("insert into student values(?,?,?,?,?)",
+            [req.body['mis'],req.body['fname'],req.body['lname'],parseInt(req.body['zipcode']),req.body['phone']],
+            function(err,result){
+                if (err) throw err;
+                console.log(result);
+            });
+        });
     res.redirect("/course_dept")
-})
+});
 
 app.get("/course_dept",function(req,res){
     res.render("course_dept");
