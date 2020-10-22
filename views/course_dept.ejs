@@ -1,0 +1,29 @@
+<%- include('partials/header') %>
+
+<label>Choose Department</label>
+<select name="department">
+    <option value="Computer Engineering">Computer Engineering</option>
+</select>
+<label>Choose Semester</label>
+<select name="semester">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+</select>
+<label>Choose Year</label>
+<select name="year">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+</select>
+<label>CGPA</label>
+<input type = "number" class="form-control" name = "cgpa" placeholder = "CGPA" min="0" max="10" step="0.1" required>
+<button type="submit">Submit</button>
+
+<%- include('partials/footer') %>

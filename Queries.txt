@@ -1,0 +1,33 @@
+insert into student_loc2 values("Mumbai","Maharashtra");
+insert into student_loc1 values(512,"Mumbai");
+insert into student values("111","Sample1","Sample2",512,"99999");
+insert into department values("Computer Engineering",20);
+insert into student_dept values("111","Computer Engineering");
+insert into marksheet values(1,"666",9.0,1);
+insert into performance values("111",1,"666");
+insert into attendance values("111",1,100,105);
+insert into course_title values("DBMS","Computer Engineering",3);
+insert into course values("CS-101","DBMS");
+insert into takes values("111","CS-101","A");
+insert into payment_details values("T-000",1,84000,"SUCCESSFUL");
+insert into fees("111","T-000");
+
+select * from student;
+select city from student_loc1 where zipcode=512;
+select state from student_loc2 where city="Mumbai";
+
+select * from student_dept;
+select tot_courses_offered from department where dept_name="Computer Engineering";
+
+select * from performance where MIS='111';
+select cgpa,year from marksheet where semester='1' and result_id='666';
+
+select transaction_id from fees where MIS="111";
+select year,amount,status from payment_details where transaction_id="T-000";
+
+select * from takes where MIS="111";
+select title from course where course_id="CS-101";
+select dept_name,credits from course_title where title="DBMS";
+
+select * from attendance where MIS="111";
+
