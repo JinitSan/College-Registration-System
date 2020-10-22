@@ -8,12 +8,12 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine","ejs");
 app.use(express.static("public"));
 
-var con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "password",
-    database:"student_reg"
-});
+// var con = mysql.createConnection({
+//     host: "localhost",
+//     user: "root",
+//     password: "password",
+//     database:"student_reg"
+// });
 
 app.get("/",function(req,res){
     res.send("<h1>College Registration System</h1>")
@@ -43,6 +43,15 @@ app.get("/course_dept",function(req,res){
 });
 
 app.post("/course_dept",function(req,res){
+    console.log(req.body);
+    res.redirect("/attendance_transaction")
+})
+
+app.get("/attendance_transaction",function(req,res){
+    res.render("attendance_transaction");
+});
+
+app.post("/attendance_transaction",function(req,res){
     console.log(req.body);
 })
 

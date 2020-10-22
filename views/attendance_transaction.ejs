@@ -1,0 +1,39 @@
+<%- include('partials/header') %>
+
+<label>Transaction ID</label>
+<input type = "text" class="form-control" name = "transaction_id" placeholder = "eg.55555" required>
+<label>Amount</label>
+<input type = "text" class="form-control" name = "amount" placeholder = "eg.100000" required>
+
+<label>Status</label>
+<select name="status">
+    <option value="Success">Successful</option>
+    <option value="Fail">Failure</option>
+</select>
+
+<label>Choose Year</label>
+<select name="year">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+</select>
+
+<label>Days Present</label>
+<input type = "number" class="form-control" name = "days_present" placeholder = "eg.100" required>
+
+<label>Choose Semester</label>
+<select name="semester">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+</select>
+
+<button type="submit">Submit</button>
+<%- include('partials/footer') %>
+
