@@ -37,6 +37,10 @@ input {
     outline: none;
 }
 
+select{
+    margin: 5px;
+}
+
 button {
     cursor: pointer;
     padding: 12px;
