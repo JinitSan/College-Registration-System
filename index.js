@@ -8,12 +8,14 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine","ejs");
 app.use(express.static("public"));
 
-// var con = mysql.createConnection({
-//     host: "localhost",
-//     user: "root",
-//     password: "password",
-//     database:"student_reg"
-// });
+var con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "Jin@mysql201",
+    database:"student_reg"
+});
+
+var student = {}
 
 app.get("/",function(req,res){
     res.send("<h1>College Registration System</h1>")
@@ -34,6 +36,7 @@ app.get("/register",function(req,res){
 })
 
 app.post("/register",function(req,res){
+    student['MIS'] = req.body['mis']
     con.query("SELECT * FROM student_loc2 WHERE city = ?",[req.body['city']],function (err, result){
         if (err) throw err;
         if(result.length==0){
@@ -59,7 +62,19 @@ app.get("/course_dept",function(req,res){
 });
 
 app.post("/course_dept",function(req,res){
-    console.log(req.body);
+    con.query("insert into student_dept values(?,?)",[student['MIS'],req.body['department']],function(err,result){
+        if (err) throw err;
+    });
+    con.query("insert into marksheet values(?,?,?,?)",[req.body['semester'],req.body['result_id'],req.body['cgpa'],req.body['year']],function(err,result){
+        if(err) throw err;
+    });
+    con.query("insert into performance values(?,?,?)",[student['MIS'],req.body['semester'],req.body['result_id']],function(err,result){
+        if(err) throw err;
+    })
+    con.query("insert into takes values(?,?,?)",[student['MIS'],req.body['course'],req.body['grade']],function(err,result){
+        if(err) throw err;
+    });
+    console.log("Course data entered successfully!")
     res.redirect("/attendance_transaction")
 })
 

@@ -1,5 +1,6 @@
 <%- include('partials/header') %>
-
+<h1>Register</h1>
+<form action="/course_dept" method="POST">
 <label>Choose Department</label>
 <select name="department">
     <option value="Computer Engineering">Computer Engineering</option>
@@ -22,11 +23,22 @@
     <option value="3">3</option>
     <option value="4">4</option>
 </select>
-<label>CGPA</label>
+<label>Enter CGPA</label>
 <input type = "number" class="form-control" name = "cgpa" placeholder = "CGPA" min="0" max="10" step="0.1" required>
+<label>Result_ID</label>
+<input type = "number" class="form-control" name = "result_id" placeholder = "Result_ID" required>
 <label>Choose Course</label>
 <select name="course">
-    <option value="DBMS">DBMS</option>
+    <option value="CS-101">CS-101</option>
+</select>
+<label>Enter Grade Obtained for Course</label>
+<select name="grade">
+    <option value="A">A</option>
+    <option value="B">B</option>
+    <option value="C">C</option>
+    <option value="D">D</option>
+    <option value="E">E</option>
+    <option value="F">F</option>
 </select>
 <button type="submit">Submit</button>
 
