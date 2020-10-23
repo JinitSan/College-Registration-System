@@ -180,7 +180,7 @@ app.post("/attendance_transaction",function(req,res){
         if(err) throw err;
     });
     con.query("insert into payment_details values(?,?,?,?)",
-    [req.body['transaction_id'],req.body['year'],req.body['amount'],req.body['days_present']],function(err,result){
+    [req.body['transaction_id'],req.body['year'],req.body['amount'],req.body['status']],function(err,result){
         if(err) throw err;
     });
     con.query("insert into fees values(?,?)",
