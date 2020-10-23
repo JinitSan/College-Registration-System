@@ -13,12 +13,19 @@ app.use(express.static("public"));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
+<<<<<<< Updated upstream
     password: "Jin@mysql201",
     database:"student_reg"
 });
 
 var student = {}
 
+=======
+    password: "password",
+    database:"student_reg"
+});
+
+>>>>>>> Stashed changes
 app.get("/",function(req,res){
     res.send("<h1>College Registration System</h1>")
 })
@@ -36,7 +43,11 @@ app.get("/register",function(req,res){
 })
 
 app.post("/register",function(req,res){
+<<<<<<< Updated upstream
     student['MIS'] = req.body['mis'];
+=======
+    student['MIS'] = req.body['mis']
+>>>>>>> Stashed changes
     con.query("SELECT * FROM student_loc2 WHERE city = ?",[req.body['city']],function (err, result){
         if (err) throw err;
         if(result.length==0){
@@ -132,6 +143,10 @@ app.post("/student_info",function(req,res){
         res.render("student_info")
 })
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 app.get("/course_dept",function(req,res){
     res.render("course_dept");
 });
