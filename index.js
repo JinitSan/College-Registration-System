@@ -13,9 +13,17 @@ app.use(express.static("public"));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "password",
+<<<<<<< HEAD
+    password: "Jin@mysql201",
     database:"student_reg"
 });
+=======
+    password: "Jin@mysql201",
+    database:"student_reg"
+});
+
+var student = {}
+>>>>>>> e8fc0eb3feefbfe31c02377db90a0cb2ed492522
 
 app.get("/",function(req,res){
     res.send("<h1>College Registration System</h1>")
@@ -109,6 +117,7 @@ app.get("/register",function(req,res){
 })
 
 app.post("/register",function(req,res){
+    student['MIS'] = req.body['mis']
     con.query("SELECT * FROM student_loc2 WHERE city = ?",[req.body['city']],function (err, result){
         if (err) throw err;
         if(result.length==0){
@@ -134,7 +143,19 @@ app.get("/course_dept",function(req,res){
 });
 
 app.post("/course_dept",function(req,res){
-    console.log(req.body);
+    con.query("insert into student_dept values(?,?)",[student['MIS'],req.body['department']],function(err,result){
+        if (err) throw err;
+    });
+    con.query("insert into marksheet values(?,?,?,?)",[req.body['semester'],req.body['result_id'],req.body['cgpa'],req.body['year']],function(err,result){
+        if(err) throw err;
+    });
+    con.query("insert into performance values(?,?,?)",[student['MIS'],req.body['semester'],req.body['result_id']],function(err,result){
+        if(err) throw err;
+    })
+    con.query("insert into takes values(?,?,?)",[student['MIS'],req.body['course'],req.body['grade']],function(err,result){
+        if(err) throw err;
+    });
+    console.log("Course data entered successfully!")
     res.redirect("/attendance_transaction")
 })
 
@@ -143,8 +164,20 @@ app.get("/attendance_transaction",function(req,res){
 });
 
 app.post("/attendance_transaction",function(req,res){
-    console.log(req.body);
-})
+    con.query("insert into attendance values(?,?,?,?)",
+    [student['MIS'],req.body['semester'],req.body['days_present'],105],function(err,result){
+        if(err) throw err;
+    });
+    con.query("insert into payment_details values(?,?,?,?)",
+    [req.body['transcation_id'],req.body['year'],req.body['amount'],req.body['days_present']],function(err,result){
+        if(err) throw err;
+    });
+    con.query("insert into fees(?,?)",
+    [student['MIS'],req.body['transaction_id']],function(err,result){
+        if(err) throw err;
+    });
+    console.log("Transaction and Attendance details entered successfully");
+});
 
 function get_personal_details(details){
     personal_data.push(details)

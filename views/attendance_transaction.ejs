@@ -1,5 +1,6 @@
 <%- include('partials/header') %>
-
+<h1>Register</h1>
+<form action="/attendance_transaction" method="POST">
 <label>Transaction ID</label>
 <input type = "text" class="form-control" name = "transaction_id" placeholder = "eg.55555" required>
 <label>Amount</label>
@@ -20,7 +21,7 @@
 </select>
 
 <label>Days Present</label>
-<input type = "number" class="form-control" name = "days_present" placeholder = "eg.100" required>
+<input type = "number" class="form-control" name = "days_present" placeholder = "eg.100" max=105 required>
 
 <label>Choose Semester</label>
 <select name="semester">
