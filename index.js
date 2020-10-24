@@ -52,8 +52,13 @@ app.post("/register",function(req,res){
             function(err,result){
                 if (err) throw err;
                 console.log(result);
-            });
         });
+        con.query("insert into credentials values(?,?)",
+            [req.body['mis'],req.body['password']],
+            function(err,result){
+                if (err) throw err;
+        });
+    });
     res.redirect("/course_dept")
 });
 
@@ -173,6 +178,7 @@ app.post("/attendance_transaction",function(req,res){
         if(err) throw err;
     });
     console.log("Transaction and Attendance details entered successfully");
+    res.redirect("student_info")
 });
 
 function get_personal_details(details){
