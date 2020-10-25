@@ -8,13 +8,65 @@
     <body>
         <div class = "chat">
             <div id = "sidebar" class = "chat__sidebar">
-
+                <h3> Personal Details</h3>
+                <br>
+                <h4> MIS</h4>
+                <p> <%= MIS %></p>
+                <br>
+                <h4> Name</h4>
+                <p> <%= fname %> <%= lname %></p>
+                <br>
+                <h4>Department</h4>
+                <p><%= dept_name %></p>
+                <br>
+                <h4> Zip-code</h4>
+                <p> <%= zipcode %></p>
+                <br>
+                <h4> Phone Number</h4>
+                <p> <%= phone %></p>
+                <br>
+                <h4> City</h4>
+                <p><%= city %></p>
+                <br>
+                <h4> State</h4>
+                <p><%= state %></p>
+                <br>
             </div>
             <div class = "chat__main">
-                <div id = "messages" class = "chat__messages"></div>
-
-                <div class = "compose">
+                <div id = "messages" class = "chat__messages">
+                    <h3>Payment Details                                Attendance Record</h3>
+                    <br>
+                    <p>ID: <%= transaction_id %></p>
+                    <br>
+                    <p>Year: <%= fees_year %></p>
+                    <br>
+                    <p>Amount: <%= fees_amount %></p>
+                    <br>
+                    <p>Status: <%= fees_status %></p>
+                    <br>
+                    <h3>Attendance Record</h3>
+                    <br>
+                    <p>Days Present: <%= attendance_days_present %></p>
+                    <br>
+                    <p>Total Working Days: <%= attendance_tot_days %></p>
+                    <br>
+                    <p>Semester: <%= attendance_semester %></p>
+                    <br>
+                    <h3>Academic Details</h3>
+                    <br>
+                    <p>Performance</p>
+                    <br>
+                    <ul>
+                        <% for(var i=0; i<acad_course_id.length; i++) { %>
+                            <li>
+                                Result ID: <%= acad_result_id[i] %>   |ID: <%= acad_course_id[i]%>   |Title: <%= acad_title[i] %>   |Credits: <%= acad_credits[i] %>   |Grade: <%= acad_grades[i] %>   |CGPA: <%=acad_cgpa[i] %>
+                            </li>
+                        <% } %>
+                    </ul>
+                </div>
                     
+                <div class = "compose">
+                   
                 </div>
                 
             </div>
