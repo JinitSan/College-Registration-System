@@ -202,12 +202,8 @@ app.post("/student_info",function(req,res){
                 });
                 
             }
-<<<<<<< HEAD
-    });
-=======
         });
-        res.render("student_info",{MIS:req.body['mis']});
->>>>>>> 7738fc9825d3168da282609290e29695d914f7f0
+        
 })
 
 app.get("/course_dept",function(req,res){
