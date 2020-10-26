@@ -5,12 +5,6 @@ const app = express();
 const mysql = require("mysql")
 
 var personal_data = []
-var credits = []
-var course_id = []
-var course_title = []
-var grades = []
-var cgpa = []
-var result_id = []
 var size
 
 app.use(bodyParser.urlencoded({extended:true}));
@@ -101,6 +95,12 @@ app.post("/student_info",function(req,res){
             if (err) throw err;
 
             if(result.length != 0){
+                var credits = []
+                var course_id = []
+                var course_title = []
+                var grades = []
+                var cgpa = []
+                var result_id = []
                 con.query("SELECT * FROM STUDENT WHERE MIS = ?", [req.body['mis']], function(err, result){
                     if (err) throw err;
 
