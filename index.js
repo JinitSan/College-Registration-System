@@ -46,7 +46,7 @@ app.get("/student_info", function(req, res){
         phone: '',
         city: '',
         state: '',
-        transaction_id: result7[0].TRANSACTION_ID,
+        transaction_id: '',
         fees_year: '',
         fees_amount: '',
         fees_status: '',
@@ -90,6 +90,12 @@ app.post("/register",function(req,res){
 });
 
 app.post("/student_info",function(req,res){
+    credits = []
+    course_id = []
+    course_title = []
+    grades = []
+    cgpa = []
+    result_id = []
     con.query("SELECT * FROM credentials WHERE MIS = ? and password = ?", [req.body['mis'], req.body['password']]
         ,function(err, result){
             if (err) throw err;
@@ -247,7 +253,7 @@ app.post("/attendance_transaction",function(req,res){
         if(err) throw err;
     });
     console.log("Transaction and Attendance details entered successfully");
-    res.redirect("student_info")
+    res.redirect("/")
 });
 
 function get_personal_details(details){
