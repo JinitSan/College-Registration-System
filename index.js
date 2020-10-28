@@ -67,7 +67,8 @@ app.get("/student_info", function(req, res){
         acad_course_id: '',
         dept_name: '',
         acad_cgpa: '',
-        acad_result_id: ''
+        acad_result_id: '',
+        result_semester: ''
     });
 });
 app.post("/register",function(req,res){
@@ -102,6 +103,7 @@ app.post("/student_info",function(req,res){
     course_title = []
     grades = []
     cgpa = []
+    cgpa_semester = []
     result_id = []
     if(req.body['mis'] != undefined && req.body['password'] != undefined){
         student['MIS'] = req.body['mis'];
@@ -123,8 +125,8 @@ app.post("/student_info",function(req,res){
                 }
                 if(req.body['new_semester'] != undefined && req.body['new_days_present'] != undefined){
                     if (req.body['new_semester'].length != 0 && req.body['new_days_present'].length != 0){
-                        con.query("UPDATE ATTENDANCE SET SEMESTER = ?, DAYS_PRESENT = ? WHERE MIS = ?",
-                        [req.body['new_semester'], req.body['new_days_present'], student['MIS']],
+                        con.query("UPDATE ATTENDANCE SET DAYS_PRESENT = ? WHERE MIS = ? AND SEMESTER = ?",
+                        [req.body['new_days_present'], student['MIS'], req.body['new_semester']],
                         function(err, result14){
                             if(err) throw err;
                         });
@@ -150,9 +152,10 @@ app.post("/student_info",function(req,res){
                                         for(i = 0; i < result5.length; i++){
                                             result_id.push(result5[i].RESULT_ID)
 
-                                            con.query("SELECT CGPA, YEAR FROM MARKSHEET WHERE RESULT_ID = ?", [result5[i].RESULT_ID], function(err, result6){
+                                            con.query("SELECT CGPA, SEMESTER FROM MARKSHEET WHERE RESULT_ID = ?", [result5[i].RESULT_ID], function(err, result6){
                                                 get_personal_details(result6)
                                                 cgpa.push(result6[0].CGPA)
+                                                cgpa_semester.push(result6[0].SEMESTER)
 
                                             });
                                         }
@@ -210,7 +213,8 @@ app.post("/student_info",function(req,res){
                                                                             acad_course_id: course_id,
                                                                             dept_name: result4[0].DEPT_NAME,
                                                                             acad_cgpa: cgpa,
-                                                                            acad_result_id: result_id
+                                                                            acad_result_id: result_id,
+                                                                            result_semester: cgpa_semester
                                                                         });
                                                                     }
                                                                 });

@@ -58,9 +58,23 @@
                     <p>Performance</p>
                     <br>
                     <ul>
+                        <% for(var i=0; i<acad_result_id.length; i++) { %>
+                            <li>
+                                Result ID: <%= acad_result_id[i] %> 
+                            </li>
+                            
+                            <li>
+                                CGPA: <%=acad_cgpa[i] %>|   Semester: <%= result_semester[i] %>
+                            </li>
+                        <% } %>
+                    </ul>
+                    <br>
+                    <p>Course wise performance</p>
+                    <br>
+                    <ul>
                         <% for(var i=0; i<acad_course_id.length; i++) { %>
                             <li>
-                                Result ID: <%= acad_result_id[i] %>   |ID: <%= acad_course_id[i]%>   |Title: <%= acad_title[i] %>   |Credits: <%= acad_credits[i] %>   |Grade: <%= acad_grades[i] %>   |CGPA: <%=acad_cgpa[i] %>
+                                ID: <%= acad_course_id[i]%>   |Title: <%= acad_title[i] %>   |Credits: <%= acad_credits[i] %>   |Grade: <%= acad_grades[i] %> 
                             </li>
                         <% } %>
                     </ul>
