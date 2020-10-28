@@ -18,28 +18,36 @@
                     <a href = "register.html">Register here!</a>
                 </form> -->
                 <form action="/student_info" method="POST">
-                    
-                    <div class="form-group">
-                        <label for="name">Drop Course (Update Course)</label>
-                        <input type="name" class="form-control" name="drop_course_id">
-                    </div>
-                    <div class="form-group">
-                        <label for="name">New Course (Update Course)</label>
-                        <input type="name" class="form-control" name="new_course_id">
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Grade (Update Course)</label>
-                        <input type="name" class="form-control" name="new_grade">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="name">Semester (Update Attendance)</label>
-                        <input type="name" class="form-control" name="new_semester">
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Days Present (Update Attendance)</label>
-                        <input type="name" class="form-control" name="new_days_present">
-                    </div>
+                    <label for="name">New Course (Update Course)</label>
+                    <select name="new_course">
+                        <option value="">None</option>
+                        <option value="CS-101">CS-101</option>
+                        <option value="CS-102">CS-102</option>
+                    </select>
+                    <label for="name">Grade (Update Course)</label>
+                    <select name="new_grade">
+                        <option value="">None</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                    </select>
+                    <label for="name">Semester (Update Attendance)</label>
+                    <select name="new_semester">
+                        <option value="">None</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                    </select>        
+                    <label for="name">Days Present (Update Attendance)</label>
+                    <input type = "number" class="form-control" name = "new_days_present" placeholder = "eg.100" max=105>
                     <button type="submit" class="btn btn-dark">Submit</button>
                 </form>
             </div>

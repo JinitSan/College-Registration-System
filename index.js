@@ -14,7 +14,7 @@ app.use(express.static("public"));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "password",
+    password: "Jin@mysql201",
     database:"student_reg"
 });
 
@@ -37,7 +37,20 @@ app.get("/update",function(req,res){
 });
 
 app.post("/update", function(req,res){
-    console.log(res.body)
+    // if(req.body['new_course'].length!=0){
+    //     con.query("insert into takes values(?,?,?)",
+    //     [student['MIS'],req.body['new_course'],req.body['new_grade']],function(err){
+    //         if(err) throw err;
+    //     });
+    // }
+    // if(req.body['new_semester'].length!=0){
+    //     con.query("insert into attendance values(?,?,?,?)",
+    //     [student['MIS'],parseInt(req.body['new_semester']),parseInt(req.body['new_days_present']),105],function(err){
+    //         if(err) throw err;
+    //     });
+    // }
+    // res.redirect("/student_info")
+    console.log(req.body)
 });
 
 app.get("/register",function(req,res){
@@ -61,7 +74,7 @@ app.get("/student_info", function(req, res){
         attendance_semester: '',
         attendance_days_present: '',
         attendance_tot_days: '',
-        acad_grades: grades,
+        acad_grades: '',
         acad_title: '',
         acad_credits: '',
         acad_course_id: '',
@@ -114,24 +127,19 @@ app.post("/student_info",function(req,res){
             if (err) throw err;
 
             if(result.length != 0){
-                if(req.body['drop_course_id'] != undefined && req.body['new_course_id'] != undefined){
-                    if (req.body['drop_course_id'].length != 0 && req.body['new_course_id'].length != 0){
-                        con.query("UPDATE TAKES SET COURSE_ID = ?, GRADE = ? WHERE MIS = ? AND COURSE_ID = ?",
-                        [req.body['new_course_id'], req.body['new_grade'], student['MIS'], req.body['drop_course_id']],
-                        function(err, result13){
-                            if(err) throw err;
-                        });
-                    }
+                if(req.body['new_course']!=undefined && req.body['new_grade']!=undefined && req.body['new_course'].length!=0 && req.body['new_grade'].length!=0){
+                    con.query("insert into takes values(?,?,?)",
+                    [student['MIS'],req.body['new_course'],req.body['new_grade']],function(err){
+                        if(err) throw err;
+                    });
                 }
-                if(req.body['new_semester'] != undefined && req.body['new_days_present'] != undefined){
-                    if (req.body['new_semester'].length != 0 && req.body['new_days_present'].length != 0){
-                        con.query("UPDATE ATTENDANCE SET DAYS_PRESENT = ? WHERE MIS = ? AND SEMESTER = ?",
-                        [req.body['new_days_present'], student['MIS'], req.body['new_semester']],
-                        function(err, result14){
-                            if(err) throw err;
-                        });
-                    }
+                if(req.body['new_semester']!=undefined && req.body['new_days_present']!=undefined && req.body['new_semester'].length!=0 && req.body['new_days_present'].length!=0){
+                    con.query("insert into attendance values(?,?,?,?)",
+                    [student['MIS'],parseInt(req.body['new_semester']),parseInt(req.body['new_days_present']),105],function(err){
+                        if(err) throw err;
+                    });
                 }
+                
                 con.query("SELECT * FROM STUDENT WHERE MIS = ?", [student['MIS']], function(err, result){
                     if (err) throw err;
 
@@ -236,7 +244,7 @@ app.post("/student_info",function(req,res){
                 
             }
         });
-        
+    return
 })
 
 app.get("/course_dept",function(req,res){
