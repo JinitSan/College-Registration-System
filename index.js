@@ -32,6 +32,14 @@ app.post("/", function(req,res){
     console.log(res.body)
 });
 
+app.get("/update",function(req,res){
+    res.render("update");
+});
+
+app.post("/update", function(req,res){
+    console.log(res.body)
+});
+
 app.get("/register",function(req,res){
     res.render("details");
 });
@@ -88,7 +96,6 @@ app.post("/register",function(req,res){
     });
     res.redirect("/course_dept")
 });
-
 app.post("/student_info",function(req,res){
     credits = []
     course_id = []
@@ -96,18 +103,34 @@ app.post("/student_info",function(req,res){
     grades = []
     cgpa = []
     result_id = []
-    con.query("SELECT * FROM credentials WHERE MIS = ? and password = ?", [req.body['mis'], req.body['password']]
+    if(req.body['mis'] != undefined && req.body['password'] != undefined){
+        student['MIS'] = req.body['mis'];
+        student['PASSWORD'] = req.body['password'];
+    }
+    con.query("SELECT * FROM credentials WHERE MIS = ? and password = ?", [student['MIS'], student['PASSWORD']]
         ,function(err, result){
             if (err) throw err;
 
             if(result.length != 0){
-                var credits = []
-                var course_id = []
-                var course_title = []
-                var grades = []
-                var cgpa = []
-                var result_id = []
-                con.query("SELECT * FROM STUDENT WHERE MIS = ?", [req.body['mis']], function(err, result){
+                if(req.body['drop_course_id'] != undefined && req.body['new_course_id'] != undefined){
+                    if (req.body['drop_course_id'].length != 0 && req.body['new_course_id'].length != 0){
+                        con.query("UPDATE TAKES SET COURSE_ID = ?, GRADE = ? WHERE MIS = ? AND COURSE_ID = ?",
+                        [req.body['new_course_id'], req.body['new_grade'], student['MIS'], req.body['drop_course_id']],
+                        function(err, result13){
+                            if(err) throw err;
+                        });
+                    }
+                }
+                if(req.body['new_semester'] != undefined && req.body['new_days_present'] != undefined){
+                    if (req.body['new_semester'].length != 0 && req.body['new_days_present'].length != 0){
+                        con.query("UPDATE ATTENDANCE SET SEMESTER = ?, DAYS_PRESENT = ? WHERE MIS = ?",
+                        [req.body['new_semester'], req.body['new_days_present'], student['MIS']],
+                        function(err, result14){
+                            if(err) throw err;
+                        });
+                    }
+                }
+                con.query("SELECT * FROM STUDENT WHERE MIS = ?", [student['MIS']], function(err, result){
                     if (err) throw err;
 
                     get_personal_details(result)
@@ -118,10 +141,10 @@ app.post("/student_info",function(req,res){
                         con.query("SELECT STATE FROM STUDENT_LOC2 WHERE CITY = ?", [result2[0].CITY], function(err, result3){
                             if (err) throw err;
                             get_personal_details(result3)
-                            con.query("SELECT DEPT_NAME FROM STUDENT_DEPT WHERE MIS = ?",[req.body['mis']], function(err, result4){
+                            con.query("SELECT DEPT_NAME FROM STUDENT_DEPT WHERE MIS = ?",[student['MIS']], function(err, result4){
                                 if (err) throw err
                                 get_personal_details(result4)
-                                con.query("SELECT SEMESTER, RESULT_ID FROM PERFORMANCE WHERE MIS = ?",[req.body['mis']], function(err, result5){
+                                con.query("SELECT SEMESTER, RESULT_ID FROM PERFORMANCE WHERE MIS = ?",[student['MIS']], function(err, result5){
                                     if (err) throw err
                                     if(result5){
                                         for(i = 0; i < result5.length; i++){
@@ -134,16 +157,16 @@ app.post("/student_info",function(req,res){
                                             });
                                         }
                                     }
-                                    con.query("SELECT TRANSACTION_ID FROM FEES WHERE MIS = ?", [req.body['mis']], function(err, result7){
+                                    con.query("SELECT TRANSACTION_ID FROM FEES WHERE MIS = ?", [student['MIS']], function(err, result7){
                                         if (err) throw err
                                         get_personal_details(result7)
                                         con.query("SELECT YEAR, AMOUNT, STATUS FROM PAYMENT_DETAILS WHERE TRANSACTION_ID = ?", [result7[0].TRANSACTION_ID], function(err, result8){
                                             get_personal_details(result8)
-                                            con.query("SELECT SEMESTER, DAYS_PRESENT, TOT_WORKING_DAYS FROM ATTENDANCE WHERE MIS = ?", [req.body['mis']],
+                                            con.query("SELECT SEMESTER, DAYS_PRESENT, TOT_WORKING_DAYS FROM ATTENDANCE WHERE MIS = ?", [student['MIS']],
                                             function(err, result9){
                                                 if (err) throw err
                                                 get_personal_details(result9)
-                                                con.query("SELECT COURSE_ID, GRADE FROM TAKES WHERE MIS = ?", [req.body['mis']], function(err, result10){
+                                                con.query("SELECT COURSE_ID, GRADE FROM TAKES WHERE MIS = ?", [student['MIS']], function(err, result10){
                                                     if (err) throw err
                                                     get_personal_details(result10)
                                                     

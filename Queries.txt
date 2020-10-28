@@ -31,3 +31,8 @@ select dept_name,credits from course_title where title="DBMS";
 
 select * from attendance where MIS="111";
 
+ update takes set course_id='CS-102', grade='B'
+    -> where MIS='111' and course_id='CS-101';
+
+ update attendance set semester=2, days_present=90
+    -> where MIS='888';

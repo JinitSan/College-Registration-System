@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Student Portal</title>
+        <link rel = "icon" href = "/img/favicon.png">
+        <link rel = "stylesheet" href = "/css/styles.min.css">
+    </head>
+    <body>
+        <div class = "centered-form">
+            <div class = "centered-form__box">
+                <h4>Update Course/Attendance</h4>
+                <!-- <form action="/login" method="POST">
+                    <label for="mis">Enter the MIS</label>
+                    <input type = "text" name = "mis" placeholder = "Display name" class="form-control" required>
+                    <label for="password">Password</label>
+                    <input type = "text" name = "password" placeholder = "Password" class="form-control" required>
+                    <button type="submit">Submit</button>
+                    <a href = "register.html">Register here!</a>
+                </form> -->
+                <form action="/student_info" method="POST">
+                    
+                    <div class="form-group">
+                        <label for="name">Drop Course (Update Course)</label>
+                        <input type="name" class="form-control" name="drop_course_id">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">New Course (Update Course)</label>
+                        <input type="name" class="form-control" name="new_course_id">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Grade (Update Course)</label>
+                        <input type="name" class="form-control" name="new_grade">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="name">Semester (Update Attendance)</label>
+                        <input type="name" class="form-control" name="new_semester">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Days Present (Update Attendance)</label>
+                        <input type="name" class="form-control" name="new_days_present">
+                    </div>
+                    <button type="submit" class="btn btn-dark">Submit</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
