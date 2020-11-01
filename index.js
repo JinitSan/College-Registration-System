@@ -139,6 +139,16 @@ app.post("/student_info",function(req,res){
                         if(err) throw err;
                     });
                 }
+                if(req.body['new_semester']!=undefined && req.body['new_year']!=undefined && req.body['new_cgpa']!=undefined && req.body['new_result_id']!=0){
+                    con.query("insert into marksheet values(?,?,?,?)",
+                    [parseInt(req.body['new_semester']),req.body['new_result_id'],parseFloat(req.body['new_cgpa']),parseInt(req.body['new_year'])],function(err){
+                        if(err) throw err;
+                    });
+                    con.query("insert into performance values(?,?,?)",
+                    [student['MIS'],parseInt(req.body['new_semester']),req.body['result_id']],function(err){
+                        if(err) throw err;
+                    })
+                }
                 
                 con.query("SELECT * FROM STUDENT WHERE MIS = ?", [student['MIS']], function(err, result){
                     if (err) throw err;
