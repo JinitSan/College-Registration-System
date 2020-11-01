@@ -20,10 +20,6 @@ var con = mysql.createConnection({
 
 var student = {}
 
-// app.get("/",function(req,res){
-//     res.send("<h1>College Registration System</h1>")
-// });
-
 app.get("/",function(req,res){
     res.render("login");
 });
@@ -37,19 +33,6 @@ app.get("/update",function(req,res){
 });
 
 app.post("/update", function(req,res){
-    // if(req.body['new_course'].length!=0){
-    //     con.query("insert into takes values(?,?,?)",
-    //     [student['MIS'],req.body['new_course'],req.body['new_grade']],function(err){
-    //         if(err) throw err;
-    //     });
-    // }
-    // if(req.body['new_semester'].length!=0){
-    //     con.query("insert into attendance values(?,?,?,?)",
-    //     [student['MIS'],parseInt(req.body['new_semester']),parseInt(req.body['new_days_present']),105],function(err){
-    //         if(err) throw err;
-    //     });
-    // }
-    // res.redirect("/student_info")
     console.log(req.body)
 });
 
@@ -143,13 +126,13 @@ app.post("/student_info",function(req,res){
                         if(err) throw err;
                     });
                 }
-                if(req.body['new_semester']!=undefined && req.body['new_year']!=undefined && req.body['new_cgpa']!=undefined && req.body['new_result_id']!=0){
+                if(req.body['new_semester']!=undefined && req.body['new_year']!=undefined && req.body['new_cgpa']!=undefined && req.body['new_result_id']!=undefined && req.body['new_semester'].length!=0 && req.body['new_year'].length!=0 && req.body['new_cgpa'].length!=0 && req.body['new_result_id'].length!=0){
                     con.query("insert into marksheet values(?,?,?,?)",
                     [parseInt(req.body['new_semester']),req.body['new_result_id'],parseFloat(req.body['new_cgpa']),parseInt(req.body['new_year'])],function(err){
                         if(err) throw err;
                     });
                     con.query("insert into performance values(?,?,?)",
-                    [student['MIS'],parseInt(req.body['new_semester']),req.body['result_id']],function(err){
+                    [student['MIS'],parseInt(req.body['new_semester']),req.body['new_result_id']],function(err){
                         if(err) throw err;
                     })
                 }
@@ -214,10 +197,9 @@ app.post("/student_info",function(req,res){
 
                                                                 con.query("SELECT DEPT_NAME, CREDITS FROM COURSE_TITLE WHERE TITLE = ?", [result11[0].TITLE], function(err, result12){
                                                                     get_personal_details(result12)
+                                                                    
                                                                     credits.push(result12[0].CREDITS)
-                                                                    // console.log(size)
-                                                                    // console.log(result10.length)
-
+                                                                
                                                                     if (size == result10.length){
                                                                         res.render("student_info", {
                                                                             MIS: result[0].MIS, 
@@ -263,7 +245,6 @@ app.post("/student_info",function(req,res){
                 
             }
         });
-    return
 })
 
 app.get("/course_dept",function(req,res){

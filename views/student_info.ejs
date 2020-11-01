@@ -35,52 +35,55 @@
             </div>
             <div class = "chat__main">
                 <div id = "messages" class = "chat__messages">
-                    <h3>Payment Details                                Attendance Record</h3>
+                    <h3>Payment Details</h3>
                     <br>
-                    <p>ID: <%= transaction_id %></p>
+                    <p><u>ID</u>: <%= transaction_id %></p>
                     <br>
-                    <p>Year: <%= fees_year %></p>
+                    <p><u>Year</u>: <%= fees_year %></p>
                     <br>
-                    <p>Amount: <%= fees_amount %></p>
+                    <p><u>Amount</u>: <%= fees_amount %></p>
                     <br>
-                    <p>Status: <%= fees_status %></p>
+                    <p><u>Status</u>: <%= fees_status %></p>
                     <br>
                     <h3>Attendance Record</h3>
                     <br>
                     <ul>
                         <% for(var i=0; i<attendance_semester.length; i++) { %>
                             <li>
-                                Days Present: <%= attendance_days_present[i] %>
-                                Total Working Days: <%= attendance_tot_days[i] %>
-                                Semester: <%= attendance_semester[i] %>
+                                <u>Present</u>: <%= attendance_days_present[i] %>|
+                                <u>Total Working Days</u>: <%= attendance_tot_days[i] %>|
+                                <u>Semester</u>: <%= attendance_semester[i] %>
                             </li>
+                            <br>
                         <% } %>
                     </ul>
                     <p></p>
                     <br>
                     <h3>Academic Details</h3>
                     <br>
-                    <p>Performance</p>
+                    <h4>Performance</h4>
                     <br>
                     <ul>
                         <% for(var i=0; i<acad_result_id.length; i++) { %>
                             <li>
-                                Result ID: <%= acad_result_id[i] %> 
+                                <u>Result ID</u>: <%= acad_result_id[i] %> 
                             </li>
                             
                             <li>
-                                CGPA: <%=acad_cgpa[i] %>|   Semester: <%= result_semester[i] %>
+                                <u>CGPA</u>: <%=acad_cgpa[i] %>|   <u>Semester</u>: <%= result_semester[i] %>
                             </li>
+                            <br>
                         <% } %>
                     </ul>
                     <br>
-                    <p>Course wise performance</p>
+                    <h4>Course wise performance</h4>
                     <br>
                     <ul>
                         <% for(var i=0; i<acad_course_id.length; i++) { %>
                             <li>
-                                ID: <%= acad_course_id[i]%>   |Title: <%= acad_title[i] %>   |Credits: <%= acad_credits[i] %>   |Grade: <%= acad_grades[i] %> 
+                                <u>ID</u>: <%= acad_course_id[i]%>   |<u>Title</u>: <%= acad_title[i] %>   |<u>Credits</u>: 3   |<u>Grade</u>: <%= acad_grades[i] %> 
                             </li>
+                            <br>
                         <% } %>
                     </ul>
                 </div>
