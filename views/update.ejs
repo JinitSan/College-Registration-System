@@ -34,7 +34,7 @@
                         <option value="E">E</option>
                         <option value="F">F</option>
                     </select>
-                    <label for="name">Semester (Update Attendance)</label>
+                    <label for="name">Semester (Update Attendance or CGPA)</label>
                     <select name="new_semester">
                         <option value="">None</option>
                         <option value="1">1</option>
@@ -48,6 +48,17 @@
                     </select>        
                     <label for="name">Days Present (Update Attendance)</label>
                     <input type = "number" class="form-control" name = "new_days_present" placeholder = "eg.100" max=105>
+                    <label>Choose Year to Update CGPA</label>
+                    <select name="new_year">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                    <label>Enter CGPA</label>
+                    <input type = "number" class="form-control" name = "new_cgpa" placeholder = "CGPA" min="0" max="10" step="0.1" required>
+                    <label>Result_ID</label>
+                    <input type = "number" class="form-control" name = "new_result_id" placeholder = "Result_ID" required>
                     <button type="submit" class="btn btn-dark">Submit</button>
                 </form>
             </div>
