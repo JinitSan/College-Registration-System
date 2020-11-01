@@ -47,11 +47,16 @@
                     <br>
                     <h3>Attendance Record</h3>
                     <br>
-                    <p>Days Present: <%= attendance_days_present %></p>
-                    <br>
-                    <p>Total Working Days: <%= attendance_tot_days %></p>
-                    <br>
-                    <p>Semester: <%= attendance_semester %></p>
+                    <ul>
+                        <% for(var i=0; i<attendance_semester.length; i++) { %>
+                            <li>
+                                Days Present: <%= attendance_days_present[i] %>
+                                Total Working Days: <%= attendance_tot_days[i] %>
+                                Semester: <%= attendance_semester[i] %>
+                            </li>
+                        <% } %>
+                    </ul>
+                    <p></p>
                     <br>
                     <h3>Academic Details</h3>
                     <br>

@@ -118,6 +118,10 @@ app.post("/student_info",function(req,res){
     cgpa = []
     cgpa_semester = []
     result_id = []
+    attendance_sem = []
+    days_present = []
+    tot_working_days = []
+
     if(req.body['mis'] != undefined && req.body['password'] != undefined){
         student['MIS'] = req.body['mis'];
         student['PASSWORD'] = req.body['password'];
@@ -176,6 +180,11 @@ app.post("/student_info",function(req,res){
                                             con.query("SELECT SEMESTER, DAYS_PRESENT, TOT_WORKING_DAYS FROM ATTENDANCE WHERE MIS = ?", [student['MIS']],
                                             function(err, result9){
                                                 if (err) throw err
+                                                for(i = 0; i < result9.length; i++){
+                                                    attendance_sem.push(result9[i].SEMESTER)
+                                                    days_present.push(result9[i].DAYS_PRESENT)
+                                                    tot_working_days.push(result9[i].TOT_WORKING_DAYS)
+                                                }
                                                 get_personal_details(result9)
                                                 con.query("SELECT COURSE_ID, GRADE FROM TAKES WHERE MIS = ?", [student['MIS']], function(err, result10){
                                                     if (err) throw err
@@ -212,9 +221,9 @@ app.post("/student_info",function(req,res){
                                                                             fees_year: result8[0].YEAR,
                                                                             fees_amount: result8[0].AMOUNT,
                                                                             fees_status: result8[0].STATUS,
-                                                                            attendance_semester: result9[0].SEMESTER,
-                                                                            attendance_days_present: result9[0].DAYS_PRESENT,
-                                                                            attendance_tot_days: result9[0].TOT_WORKING_DAYS,
+                                                                            attendance_semester: attendance_sem,
+                                                                            attendance_days_present: days_present,
+                                                                            attendance_tot_days: tot_working_days,
                                                                             acad_grades: grades,
                                                                             acad_title: course_title,
                                                                             acad_credits: credits,
