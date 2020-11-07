@@ -11,6 +11,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine","ejs");
 app.use(express.static("public"));
 
+//connecting to the database
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -18,8 +19,10 @@ var con = mysql.createConnection({
     database:"student_reg"
 });
 
+//for storing all info of the student
 var student = {}
 
+//rendering the login form
 app.get("/",function(req,res){
     res.render("login");
 });
@@ -28,6 +31,7 @@ app.post("/", function(req,res){
     console.log(res.body)
 });
 
+//rendering the update form
 app.get("/update",function(req,res){
     res.render("update");
 });
@@ -36,11 +40,12 @@ app.post("/update", function(req,res){
     console.log(req.body)
 });
 
+//rendering the personal details form
 app.get("/register",function(req,res){
     res.render("details");
 });
 
-
+//rendering the home page after user logs in 
 app.get("/student_info", function(req, res){
     res.render("student_info", {
         MIS: '', 
@@ -67,6 +72,9 @@ app.get("/student_info", function(req, res){
         result_semester: ''
     });
 });
+/*  collecting data from the personal details form
+    inserting into the database
+*/
 app.post("/register",function(req,res){
     student['MIS'] = req.body['mis'];
     con.query("SELECT * FROM student_loc2 WHERE city = ?",[req.body['city']],function (err, result){
@@ -93,7 +101,9 @@ app.post("/register",function(req,res){
     });
     res.redirect("/course_dept")
 });
+//fetching all the data for the current logged in student
 app.post("/student_info",function(req,res){
+    //storing the result of queries in arrays
     credits = []
     course_id = []
     course_title = []
@@ -199,7 +209,7 @@ app.post("/student_info",function(req,res){
                                                                     get_personal_details(result12)
                                                                     
                                                                     credits.push(result12[0].CREDITS)
-                                                                
+                                                                    //passing the collected data to the ejs file
                                                                     if (size == result10.length){
                                                                         res.render("student_info", {
                                                                             MIS: result[0].MIS, 
@@ -247,10 +257,14 @@ app.post("/student_info",function(req,res){
         });
 })
 
+//rendering the course details form
 app.get("/course_dept",function(req,res){
     res.render("course_dept");
 });
 
+/*  collecting data from the course details form
+    inserting into the database
+*/
 app.post("/course_dept",function(req,res){
     console.log(student['MIS']);
     con.query("insert into student_dept values(?,?)",[student['MIS'],req.body['department']],function(err,result){
@@ -269,10 +283,14 @@ app.post("/course_dept",function(req,res){
     res.redirect("/attendance_transaction")
 })
 
+//rendering the attendance and transaction form
 app.get("/attendance_transaction",function(req,res){
     res.render("attendance_transaction");
 });
 
+/*  collecting data from the attendance/transaction details form
+    inserting into the database
+*/
 app.post("/attendance_transaction",function(req,res){
     console.log(student);
     con.query("insert into attendance values(?,?,?,?)",
@@ -291,12 +309,12 @@ app.post("/attendance_transaction",function(req,res){
     res.redirect("/")
 });
 
+//storing the data fetched from the database into an array for debugging purpose
 function get_personal_details(details){
     personal_data.push(details)
-    // console.log("------------------------------------------------------------------------")
-    // console.log(personal_data)
 }
 
+//server listening on port 3000
 app.listen(3000,function(){
     console.log("Server started at 3000");
 })
