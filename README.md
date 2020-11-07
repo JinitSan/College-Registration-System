@@ -18,4 +18,11 @@
    can be viewed at the center.
    Registered students can register for new courses and enter attendance record as well as grades for different    semesters  
 
+   Admin side features
+
+   Deletion of records from the database
+   Add new courses offered by the college into the database
+   Update maximum number of working days in the semester
+   Update student records in the database
+
    Frontend used: ejs, css
