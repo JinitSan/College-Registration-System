@@ -1,13 +1,13 @@
 # Student Registration Database
 
-	Student registration database stores the information related to the students.
-	The objective of this project is to design and implement a data model to effectively store all the information    related to the students.
+   Student registration database stores the information related to the students.
+   The objective of this project is to design and implement a data model to effectively store all the    information related to the students.   
 
-	Register new students.
-	Record the attendance of students.
-	Record the marks of students.
-	Record the course details and subject information.
-	Record the payment details of students.
+   Register new students.
+   Record the attendance of students.
+   Record the marks of students.
+   Record the course details and subject information.
+   Record the payment details of students.
 
    User side features
 
