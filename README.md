@@ -19,7 +19,5 @@
    Registered students can register for new courses and enter attendance record as well as grades for different    semesters  
 
    Frontend used: ejs, css
-   
-   # Relational Schema:
-   
+      
    ![Relational_Schema](snapshots/Relational_schema.png)
