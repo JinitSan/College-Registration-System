@@ -25,6 +25,7 @@
    Update maximum number of working days in the semester
    Update student records in the database
 
-   Frontend used: ejs, css
-      
+   Frontend used: HTML(ejs), css
+   
+   Backend used: MySQL, Express + NodeJS
    ![Relational_Schema](snapshots/Relational_schema.png)
