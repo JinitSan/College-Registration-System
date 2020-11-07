@@ -1,7 +1,10 @@
-# Student Registration Database
+# Project: Student Registration Database
+
+## Group: Aayush Yadav and Jinit Sanghvi
+## MIS: 111803147 and 111803150
 
    Student registration database stores the information related to the students.
-   The objective of this project is to design and implement a data model to effectively store all the    information related to the students.   
+   The objective of this project is to design and implement a data model to effectively store all the information related to the students.   
 
    Register new students.
    Record the attendance of students.
@@ -25,7 +28,28 @@
    Update maximum number of working days in the semester
    Update student records in the database
 
-   Frontend used: HTML(ejs), css
+   Frontend used:
    
-   Backend used: MySQL, Express + NodeJS
+   <ul>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JS</li>
+      <li>EJS</li>
+   </ul>
+   
+   Backend used: 
+   <ul>
+      <li>NodeJS</li>
+      <li>Express</li>
+      <li>MySQL</li>
+   </ul>
+   
+   How to run the code:
+   <ol>
+      <li>Install NodeJS</li>
+      <li>On terminal, run command "node index.js"</li>
+      <li>Open a browser</li>
+      <li>Go to localhost:3000</li>
+   </ol>
+  
    ![Relational_Schema](snapshots/Relational_schema.png)
