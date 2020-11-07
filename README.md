@@ -26,3 +26,5 @@
    Update student records in the database
 
    Frontend used: ejs, css
+      
+   ![Relational_Schema](snapshots/Relational_schema.png)
